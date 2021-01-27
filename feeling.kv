@@ -1,0 +1,26 @@
+GridLayout:
+    cols: 2
+
+    Scatter:
+        scale: 5
+        # on_motion: root.foo()
+        Image :
+            source: 'img/feelings.png'
+            allow_stretch: True
+            keep_ratio: True
+
+            if touch.is_mouse_scrolling:
+            if touch.button == 'scrolldown':
+                print('down')
+                ## zoom in
+                if self.scale < 10:
+                    self.scale = self.scale * 1.1
+
+            elif touch.button == 'scrollup':
+                ## zoom out
+                print('up')
+                if self.scale > 1:
+                    self.scale = self.scale * 0.8
+
+    Button:
+        text: 'Hello World'

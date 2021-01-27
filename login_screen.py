@@ -1,44 +1,29 @@
-import random
-
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
 
-red = [1, 0, 0, 1]
-blue = [0, 0, 1, 1]
-green = [0, 1, 0, 1]
-purple = [1, 0, 1, 1]
+from kivy.lang import Builder
+
+presentation = Builder.load_file("feeling.kv")
+class LoginScreen(GridLayout):
+
+    def __init__(self, **kwargs):
+        super(LoginScreen, self).__init__(**kwargs)
+        self.cols = 2
+        self.add_widget(Label(text='User Name'))
+        self.username = TextInput(multiline=False)
+        self.add_widget(self.username)
+        self.add_widget(Label(text='password'))
+        self.password = TextInput(password=True, multiline=False)
+        self.add_widget(self.password)
 
 
-class MainApp(App):
+class MyApp(App):
+
     def build(self):
-        layout = BoxLayout(orientation='vertical', padding=10)
-        colors = [red, green, blue, purple]
-
-        for i in range(5):
-            btn = Button(text="Button #%s" % (i + 1),
-                         background_color=random.choice(colors)
-                         )
-
-            layout.add_widget(btn)
-
-        save_button = Button(text='Save how you feel',
-                     pos_hint={'center_x':0.5, 'center_y':0.5},
-                     on_press=self.on_press_button
-                     )
-        layout.add_widget(save_button)
-        return layout
-
-    def on_press_button(self, obj):
-        print('You pressed the save button!')
+        return LoginScreen()
 
 
 if __name__ == '__main__':
-    app = MainApp()
-    app.run()
-
-# Question label: How do you feel mister XXX ?
-# DateTime label
-# Humeur dropdown choice
-# Detail Text box
-# Save button
+    MyApp().run()
